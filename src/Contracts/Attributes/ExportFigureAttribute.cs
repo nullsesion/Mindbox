@@ -1,4 +1,4 @@
-﻿namespace Contracts.Attributs
+﻿namespace Contracts.Attributes
 {
 	[AttributeUsage(AttributeTargets.Class)]
 	public class ExportFigureAttribute : Attribute

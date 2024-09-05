@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using Contracts;
-using Contracts.Attributs;
+using Contracts.Attributes;
 
 namespace MasterSystem.Services.LoadPluginManager
 {
@@ -20,14 +20,14 @@ namespace MasterSystem.Services.LoadPluginManager
 			return loadContext.LoadFromAssemblyName(AssemblyName.GetAssemblyName(pluginLocation));
 		}
 
-		public static IEnumerable<FigureInfo> FindAllTypeFigursFromAssembly(Assembly assembly)
+		public static Dictionary<Type, FigureInfo> FindAllTypeFigursFromAssembly(Assembly assembly)
 		{
 			var types = assembly.ExportedTypes
 				.Where(x => x.CustomAttributes.Any(x => x.AttributeType == typeof(ExportFigureAttribute)))
 				.ToArray();
 			;
 
-			List<FigureInfo> figures = new List<FigureInfo>();
+			Dictionary<Type, FigureInfo> figures = new Dictionary<Type, FigureInfo>();
 			foreach (Type type in types)
 			{
 				if (typeof(IFigure).IsAssignableFrom(type))
@@ -38,21 +38,20 @@ namespace MasterSystem.Services.LoadPluginManager
 					CountPointsAttribute countPointsAttribute =
 						(CountPointsAttribute)Attribute.GetCustomAttribute(type, typeof(CountPointsAttribute));
 
+					CountRadiusAttribute countRadiusAttribute =
+						(CountRadiusAttribute)Attribute.GetCustomAttribute(type, typeof(CountRadiusAttribute));
 
-					figures.Add(new FigureInfo()
+					var value = new FigureInfo()
 					{
 						Name = exportFigureAttribute.Name,
-						Type = type,
 						CountPoints = countPointsAttribute?.CountPoints ?? 0, //сколько точек нужно для создания фигуры
-						HasRadius = typeof(IFigureRotation)
-							.IsAssignableFrom(type),                          //есть ли возможность добавить радиус
-						HasRightAngle =
-							((countPointsAttribute?.CountPoints ?? 1) > 2)   //есть ли возможность найти прямой угол
-					});
+						CountRadius =
+							countRadiusAttribute?.CountRadius ?? 0, //сколько радиусов нужно для создания фигуры
+					};
+					figures[type] = value;
 				}
 			}
-
-			return figures.ToArray();
+			return figures;
 		}
 	}
 }

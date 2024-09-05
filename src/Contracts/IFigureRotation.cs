@@ -1,6 +1,9 @@
-﻿namespace Contracts;
+﻿using Contracts.Primitives;
+
+namespace Contracts;
 
 public interface IFigureRotation : IFigure
 {
-	double Radius { get; set; }
+	public IRadius[] Radii { get; }
+	void SetRadii(IRadius[] radii);
 }

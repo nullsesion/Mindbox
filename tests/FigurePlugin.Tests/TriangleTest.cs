@@ -1,11 +1,6 @@
 ﻿using Contracts.Primitives;
 using FigurePlugin.Figures;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FigurePlugin.Tests
 {
@@ -35,7 +30,7 @@ namespace FigurePlugin.Tests
 			};
 
 			Triangle triangle = new Triangle();
-			triangle.Points = points;
+			triangle.SetPoints(points);
 			if (triangle.TryGetArea(out double area))
 			{
 				Assert.AreEqual(6, area);

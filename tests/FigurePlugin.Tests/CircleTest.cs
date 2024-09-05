@@ -8,16 +8,13 @@ namespace FigurePlugin.Tests
 	public class CircleTest
 	{
 		[TestMethod]
-		public void Try_GetArea__Pnt_0_0_R1__double_PI_Returned()
+		public void Try_GetArea__R_1__PI_Returned()
 		{
-			Mock<IPoint> center = new Mock<IPoint>();
-			center.Setup(x => x.X).Returns(0d);
-			center.Setup(x => x.Y).Returns(0d);
-			
-			Circle circle = new Circle();
-			circle.Points = new IPoint[] { center.Object };
-			circle.Radius = 1d;
+			Mock<IRadius> radius = new Mock<IRadius>();
+			radius.Setup(x => x.Value).Returns(1d);
 
+			Circle circle = new Circle();
+			circle.SetRadii(new IRadius[]{ radius.Object });
 			if (circle.TryGetArea(out double area))
 			{
 				Assert.AreEqual(Math.PI, area);

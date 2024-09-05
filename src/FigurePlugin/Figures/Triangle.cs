@@ -1,18 +1,25 @@
 ﻿using Contracts;
-using Contracts.Attributs;
+using Contracts.Attributes;
 using Contracts.Primitives;
 
 namespace FigurePlugin.Figures
 {
-
 	[ExportFigure("Triangle")]
 	[CountPoints(3)]
 	public class Triangle : IFigurePolygon
 	{
-		public IPoint[] Points { get; set; }
+
+		public void SetPoints(IPoint[] points)
+		{
+			Points = points;
+		}
+
+		public IPoint[] Points { get; private set; }
 		public bool TryGetArea(out double area)
 		{
-			area = 0;
+			area = -1;
+			if (Points.Length != 3)
+				return false;
 
 			double x1 = Points[0].X;
 			double y1 = Points[0].Y;
