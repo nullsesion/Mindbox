@@ -2,7 +2,7 @@
 
 namespace MasterSystem.BuilderFigure
 {
-	public abstract class AbstractFigurePolygonBuilder
+	public abstract class AbstractPolygonBuilder
 	{
 		public IFigurePolygon Figure { get; protected set; }
 		public void Create()

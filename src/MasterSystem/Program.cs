@@ -19,11 +19,11 @@ internal class Program
 
 		KeyValuePair<Type, FigureInfo> figure = aviableFigures.First(x => x.Value.Name == "Triangle");
 
-		DirectorFigurePolygon director = new DirectorFigurePolygon();
-		RandomFigurePolygonFigurePolygonBuilder randomFigurePolygonFigurePolygonBuilder =
-			new RandomFigurePolygonFigurePolygonBuilder(figure.Key, figure.Value);
+		DirectorPolygon director = new DirectorPolygon();
+		RandomPolygonBuilder randomPolygonBuilder =
+			new RandomPolygonBuilder(figure.Key, figure.Value);
 
-		IFigurePolygon figureBuild = director.Create(randomFigurePolygonFigurePolygonBuilder);
+		IFigurePolygon figureBuild = director.Create(randomPolygonBuilder);
 		Console.WriteLine(JsonSerializer.Serialize(figureBuild));
 		
 	}

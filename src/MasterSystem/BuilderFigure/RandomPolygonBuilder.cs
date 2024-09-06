@@ -5,14 +5,14 @@ using MasterSystem.Services.LoadPluginManager;
 
 namespace MasterSystem.BuilderFigure
 {
-	public class RandomFigurePolygonFigurePolygonBuilder: AbstractFigurePolygonBuilder
+	public class RandomPolygonBuilder: AbstractPolygonBuilder
 	{
 		private IPoint[] _points { get; set; }
 		private IRadius[] _radii { get; set; }
 
 		private uint _countPoint { get; set; }
 		private uint _countRadii { get; set; }
-		public RandomFigurePolygonFigurePolygonBuilder(Type type, FigureInfo figureInfo)
+		public RandomPolygonBuilder(Type type, FigureInfo figureInfo)
 		{
 			_countPoint = figureInfo.CountPoints;
 			_countRadii = figureInfo.CountRadius;
