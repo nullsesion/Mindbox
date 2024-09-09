@@ -23,9 +23,34 @@
 -----------------------------
 В базе данных MS SQL Server есть продукты и категории. Одному продукту может соответствовать много категорий, в одной категории может быть много продуктов. Напишите SQL запрос для выбора всех пар «Имя продукта – Имя категории». Если у продукта нет категорий, то его имя все равно должно выводиться.
 
-```SELECT TOP (1000) *
+```
+CREATE TABLE Products
+(
+    ProductID INT  NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    ProductName VARCHAR(100)
+)
+
+CREATE TABLE Categorys
+(
+    CategoryID INT  NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    CategoryName VARCHAR(100)
+)
+
+CREATE TABLE ProductsCategorys
+(
+    ProductID INT NOT NULL FOREIGN KEY REFERENCES Products(ProductID),
+    CategoryID INT NOT NULL FOREIGN KEY REFERENCES Categorys(CategoryID), 
+    PRIMARY KEY (AuthorID, BookID)
+)
+
+```
+
+
+```
+SELECT TOP (1000) *
   FROM [test].[dbo].[Products] as P
   LEFT JOIN [test].[dbo].[ProductsCategorys] as PC ON P.ProductID = PC.ProductID
-  LEFT JOIN [test].[dbo].[Categorys] as C ON PC.CategoryID = C.CategoryID```
+  LEFT JOIN [test].[dbo].[Categorys] as C ON PC.CategoryID = C.CategoryID
+```
 
-
+![sql](sql.jpg)
