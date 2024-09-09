@@ -20,38 +20,49 @@ namespace MasterSystem.Services.LoadPluginManager
 			return loadContext.LoadFromAssemblyName(AssemblyName.GetAssemblyName(pluginLocation));
 		}
 
-		public static Dictionary<Type, FigureInfo> FindAllTypeFigursFromAssembly(Assembly assembly)
+		public static List<FigureInfo> FindAllTypeFigursFromAssembly(Assembly assembly)
 		{
 			var types = assembly.ExportedTypes
 				.Where(x => x.CustomAttributes.Any(x => x.AttributeType == typeof(ExportFigureAttribute)))
 				.ToArray();
 			;
 
-			Dictionary<Type, FigureInfo> figures = new Dictionary<Type, FigureInfo>();
+			List<FigureInfo> figures = new List<FigureInfo>();
 			foreach (Type type in types)
 			{
 				if (typeof(IFigure).IsAssignableFrom(type))
 				{
-					ExportFigureAttribute exportFigureAttribute =
-						(ExportFigureAttribute)Attribute.GetCustomAttribute(type, typeof(ExportFigureAttribute));
-
-					CountPointsAttribute countPointsAttribute =
-						(CountPointsAttribute)Attribute.GetCustomAttribute(type, typeof(CountPointsAttribute));
-
-					CountRadiusAttribute countRadiusAttribute =
-						(CountRadiusAttribute)Attribute.GetCustomAttribute(type, typeof(CountRadiusAttribute));
-
-					var value = new FigureInfo()
+					figures.Add(new FigureInfo()
 					{
-						Name = exportFigureAttribute.Name,
-						CountPoints = countPointsAttribute?.CountPoints ?? 0, //сколько точек нужно для создания фигуры
-						CountRadius =
-							countRadiusAttribute?.CountRadius ?? 0, //сколько радиусов нужно для создания фигуры
-					};
-					figures[type] = value;
+						Name = GetNameByType(type),
+						TypeFigure = type,
+						CountPoints = GetCountPointsByType(type), //сколько точек нужно для создания фигуры
+						CountRadius = GetCountRadiusByType(type), //сколько радиусов нужно для создания фигуры
+					});
 				}
 			}
 			return figures;
+		}
+
+		public static uint GetCountPointsByType(Type type)
+		{
+			CountPointsAttribute countPointsAttribute =
+				(CountPointsAttribute)Attribute.GetCustomAttribute(type, typeof(CountPointsAttribute));
+			return countPointsAttribute?.CountPoints ?? 0;
+		}
+
+		public static uint GetCountRadiusByType(Type type)
+		{
+			CountRadiusAttribute countRadiusAttribute =
+				(CountRadiusAttribute)Attribute.GetCustomAttribute(type, typeof(CountRadiusAttribute));
+			return countRadiusAttribute?.CountRadius ?? 0;
+		}
+
+		public static string GetNameByType(Type type)
+		{
+			ExportFigureAttribute exportFigureAttribute =
+				(ExportFigureAttribute)Attribute.GetCustomAttribute(type, typeof(ExportFigureAttribute));
+			return exportFigureAttribute?.Name ?? "";
 		}
 	}
 }

@@ -8,7 +8,6 @@ namespace FigurePlugin.Figures
 	[CountPoints(3)]
 	public class Triangle : IFigurePolygon
 	{
-
 		public void SetPoints(IPoint[] points)
 		{
 			Points = points;
@@ -34,30 +33,30 @@ namespace FigurePlugin.Figures
 
 		public bool HasRightAngle()
 		{
-			/*
-			Take Point1=( 2, 1 )
-			Take Point2=( 5, 7 )
+			//A
+			double x1 = Points[0].X;
+			double y1 = Points[0].Y;
 
-			Find the LINEAR EQUATION of the line that passes through the points (2,1) and (5,7). Your answer must be in the form of Ax + By + C = 0.
+			//B
+			double x2 = Points[1].X;
+			double y2 = Points[1].Y;
 
-			Using the equation:
-			(y1 – y2)x + (x2 – x1)y + (x1y2 – x2y1) = 0
+			//C
+			double x3 = Points[2].X;
+			double y3 = Points[2].Y;
 
-			We’ll just plug numbers in:
-			(1 – 7)x + (5 – 2)y + ( (2 x 7) – (5 x 1) ) = 0
-			-6x + 3y + (14 – 5) = 0
-			-6x + 3y + 9 = 0
+			double AB = (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
+			double BC = (x1 - x3) * (x1 - x3) + (y1 - y3) * (y1 - y3);
+			double CA = (x3 - x2) * (x3 - x2) + (y3 - y2) * (y3 - y2);
 
-			Factoring a -3 out:
-			-3( 2x – y – 3 ) = 0
+			List<double> lines = new List<double>();
+			lines.Add(AB);
+			lines.Add(BC);
+			lines.Add(CA);
 
-			Dividing both sides by -3:
-			2x – y – 3 = 0
+			lines.Sort();
 
-			And that’s the answer.
-
-		 */
-			throw new NotImplementedException();
+			return (lines[0] + lines[1] == lines[2]);
 		}
 	}
 }

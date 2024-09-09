@@ -1,16 +1,17 @@
 ﻿using Contracts;
+using Contracts.Primitives;
 
-namespace MasterSystem.BuilderFigure
+namespace MasterSystem.BuilderFigure.Polygon
 {
 	public abstract class AbstractPolygonBuilder
 	{
+		protected IPoint[] _points { get; set; }
+		protected uint _countPoint { get; set; }
 		public IFigurePolygon Figure { get; protected set; }
 		public void Create()
 		{
 			SetPoints();
-			SetRadii();
 		}
 		public abstract void SetPoints();
-		public abstract void SetRadii();
 	}
 }

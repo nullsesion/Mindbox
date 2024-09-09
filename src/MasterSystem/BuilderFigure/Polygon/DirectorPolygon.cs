@@ -1,6 +1,6 @@
 ﻿using Contracts;
 
-namespace MasterSystem.BuilderFigure
+namespace MasterSystem.BuilderFigure.Polygon
 {
 	public class DirectorPolygon
 	{
