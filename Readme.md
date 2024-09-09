@@ -40,7 +40,7 @@ CREATE TABLE ProductsCategorys
 (
     ProductID INT NOT NULL FOREIGN KEY REFERENCES Products(ProductID),
     CategoryID INT NOT NULL FOREIGN KEY REFERENCES Categorys(CategoryID), 
-    PRIMARY KEY (AuthorID, BookID)
+    PRIMARY KEY (ProductID, CategoryID)
 )
 
 ```
