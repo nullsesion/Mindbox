@@ -8,10 +8,7 @@ namespace FigurePlugin.Figures
 	[CountRadius(1)]
 	public class Circle : IFigureRotation
 	{
-		public void SetRadii(IRadius[] radii)
-		{
-			Radii = radii;
-		}
+		public void SetRadii(IRadius[] radii) => Radii = radii;
 		public IRadius[] Radii { get; private set; }
 
 		public bool TryGetArea(out double area)

@@ -8,10 +8,7 @@ namespace FigurePlugin.Figures
 	[CountPoints(3)]
 	public class Triangle : IFigurePolygon
 	{
-		public void SetPoints(IPoint[] points)
-		{
-			Points = points;
-		}
+		public void SetPoints(IPoint[] points) => Points = points;
 
 		public IPoint[] Points { get; private set; }
 		public bool TryGetArea(out double area)

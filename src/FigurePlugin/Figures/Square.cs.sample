@@ -28,12 +28,10 @@ namespace FigurePlugin.Figures
 			return true;
 		}
 
-		private IPoint[] Points { get; set; }
 
-		public void SetPoints(IPoint[] points)
-		{
-			Points = points;
-		}
+		public IPoint[] Points { get; private set; }
+
+		public void SetPoints(IPoint[] points) => Points = points;
 
 		public bool HasRightAngle()
 		{

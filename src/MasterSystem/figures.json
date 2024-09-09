@@ -36,6 +36,30 @@
         "Radii": null
     },
     {
+        "Name": "Square",
+        "Points": [
+            {
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "X": 5,
+                "Y": 5
+            }
+        ],
+        "Radii": null
+    },
+    {
+        "Name": "CartesianCircle",
+        "Points": [
+            {
+                "X": 5,
+                "Y": 5
+            }
+        ],
+        "Radii": [ { "Value": 5 } ]
+    },
+    {
         "Name": "Circle",
         "Points": null,
         "Radii": [ { "Value": 10 } ]

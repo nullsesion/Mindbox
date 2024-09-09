@@ -1,10 +1,7 @@
 ﻿using MasterSystem.Services.LoadPluginManager;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using System.Text.Json;
 using Contracts;
-using MasterSystem.BuilderFigure.Polygon;
-using MasterSystem.BuilderFigure.Rotation;
 using MasterSystem.BuilderFigure;
 using MasterSystem.BuilderFigure.Model;
 using Microsoft.Extensions.Configuration;
@@ -37,38 +34,15 @@ internal class Program
 		//получаем имя файла с фигурами в json
 		IConfigurationSection configFile = config.GetSection(dllFileName.Split('.').First());
 
-		/*
-		if (figuresLoader.GetListJsonFiguresFromFile(configFile.Value, out List<FigureJsonModel>? listJson))
-		{
-			foreach (FigureJsonModel item in listJson)
-			{
-				FigureInfo figureInfo = aviableFigures.First(x => x.Name == item.Name);
-				IFigure figure = null;
-				if (typeof(IFigurePolygon).IsAssignableFrom(figureInfo.TypeFigure)
-				    || typeof(IFigureRotation).IsAssignableFrom(figureInfo.TypeFigure))
-				{
-					DirectorFigure directorFigure = new DirectorFigure();
-					var figureBuilder =
-						new FromJsonFigureBuilder(figureInfo, item);
-
-					figure = directorFigure.Create(figureBuilder);
-					if (figure.TryGetArea(out double area))
-					{
-						Console.WriteLine(area);
-					}
-
-					
-				}
-			}
-		}
-		*/
-
 		//создаем фигуры билдером
 		if (figuresLoader.GetListJsonFiguresFromFile(configFile.Value, out List<FigureJsonModel>? listJson))
 		{
 			IEnumerable<FigureOutput> figures = listJson.Select(f =>
 			{
-				FigureInfo figureInfo = aviableFigures.First(x => x.Name == f.Name);
+				FigureInfo figureInfo = aviableFigures.FirstOrDefault(x => x.Name == f.Name);
+				if (figureInfo == null)
+					return null;
+
 				IFigure figure = null;
 
 				if (typeof(IFigurePolygon).IsAssignableFrom(figureInfo.TypeFigure)
