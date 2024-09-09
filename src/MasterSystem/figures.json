@@ -1,0 +1,90 @@
+[
+    {
+        "Name": "Triangle",
+        "Points": [
+            {
+                "X": 5.47,
+                "Y": 7.17
+            },
+            {
+                "X": 2.15,
+                "Y": 13.81
+            },
+            {
+                "X": 19.64,
+                "Y": 3.55
+            }
+        ],
+        "Radii": null
+    },
+    {
+        "Name": "Triangle",
+        "Points": [
+            {
+                "X": 5,
+                "Y": 7
+            },
+            {
+                "X": 15,
+                "Y": 13
+            },
+            {
+                "X": 19,
+                "Y": 3
+            }
+        ],
+        "Radii": null
+    },
+    {
+        "Name": "Square",
+        "Points": [
+            {
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "X": 5,
+                "Y": 5
+            }
+        ],
+        "Radii": null
+    },
+    {
+        "Name": "CartesianCircle",
+        "Points": [
+            {
+                "X": 5,
+                "Y": 5
+            }
+        ],
+        "Radii": [ { "Value": 5 } ]
+    },
+    {
+        "Name": "Circle",
+        "Points": null,
+        "Radii": [ { "Value": 10 } ]
+    },
+    {
+        "Name": "Circle",
+        "Points": null,
+        "Radii": [ { "Value": 11.97 } ]
+    },
+    {
+        "Name": "Triangle",
+        "Points": [
+            {
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "X": 3,
+                "Y": 0
+            },
+            {
+                "X": 3,
+                "Y": 4
+            }
+        ],
+        "Radii": null
+    }
+]

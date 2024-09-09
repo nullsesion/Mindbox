@@ -1,0 +1,41 @@
+﻿using Contracts;
+using Contracts.Attributes;
+using Contracts.Primitives;
+
+namespace FigurePlugin.Figures
+{
+	[ExportFigure("Square")]
+	[CountPoints(2)] //задаем точки квадрата. квадрат может быть не параллелен осям координат.
+	public class Square: IFigurePolygon
+	{
+		
+		/// <summary>
+		/// Площадь квадрата равна квадрату диагонали, деленному на два
+		/// </summary>
+		public bool TryGetArea(out double area)
+		{
+			area = 0;
+			if (Points.Length != 2)
+				return false;
+
+			double a = Points[0].X - Points[1].X;
+			double b = Points[0].Y - Points[1].Y;
+			/*
+			double len = Math.Sqrt(a * a + b * b);
+			area = len * len / 2;
+			*/
+			area = (a * a + b * b) / 2;
+			return true;
+		}
+
+
+		public IPoint[] Points { get; private set; }
+
+		public void SetPoints(IPoint[] points) => Points = points;
+
+		public bool HasRightAngle()
+		{
+			return true;
+		}
+	}
+}
